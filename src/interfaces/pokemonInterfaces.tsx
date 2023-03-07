@@ -14,6 +14,6 @@ export interface Result {
 export interface SimplePokemon {
   id: string;
   name: string;
-  url: string;
-  color: string;
+  picture: string;
+  color?: string;
 }
