@@ -1,12 +1,12 @@
 import React from 'react';
-import { Image, Text } from 'react-native';
+import { ActivityIndicator, FlatList, Image, Text } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { usePokemonPaginated } from '../hooks/usePokemonPaginated';
 import { styles } from '../theme/appTheme';
 
 export const HomeScreen = () => {
   const { top } = useSafeAreaInsets();
-  const { simplePokemonList } = usePokemonPaginated();
+  const { simplePokemonList, loadPokemons } = usePokemonPaginated();
   console.log(simplePokemonList);
 
   return (
@@ -15,9 +15,28 @@ export const HomeScreen = () => {
         source={require('../assets/pokebola.png')}
         style={styles.pokeballBG}
       />
-      <Text style={{ ...styles.title, ...styles.globalMargin, top: top + 20 }}>
+      <FlatList
+        data={simplePokemonList}
+        keyExtractor={poke => poke.id}
+        renderItem={({ item }) => (
+          <Image
+            source={{ uri: item.picture }}
+            style={{
+              width: 100,
+              height: 100,
+            }}
+          />
+        )}
+        onEndReached={loadPokemons}
+        onEndReachedThreshold={0.4}
+        showsVerticalScrollIndicator={false}
+        ListFooterComponent={
+          <ActivityIndicator style={{ height: 100 }} size={20} color="grey" />
+        }
+      />
+      {/* <Text style={{ ...styles.title, ...styles.globalMargin, top: top + 20 }}>
         Pokedex
-      </Text>
+      </Text> */}
     </>
   );
 };
