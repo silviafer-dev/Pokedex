@@ -1,3 +1,4 @@
+import { CommonActions, useNavigation } from '@react-navigation/native';
 import React, { useEffect, useRef, useState } from 'react';
 import { Text, View, StyleSheet, Dimensions, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -13,6 +14,7 @@ interface Props {
 export const PokemonCard = ({ pokemon }: Props) => {
   const [bgColor, setBgColor] = useState('grey');
   const isMounted = useRef(true);
+  const navigate = useNavigation();
 
   useEffect(() => {
     ImageColors.getColors(pokemon.picture, { fallback: 'grey' }).then(
@@ -30,7 +32,16 @@ export const PokemonCard = ({ pokemon }: Props) => {
     };
   }, [pokemon.picture]);
   return (
-    <TouchableOpacity activeOpacity={0.9}>
+    <TouchableOpacity
+      activeOpacity={0.9}
+      onPress={() =>
+        navigate.dispatch(
+          CommonActions.navigate('PokemonScreen', {
+            simplePokemon: pokemon,
+            color: bgColor,
+          }),
+        )
+      }>
       <View
         style={{
           ...styles.cardContainer,
