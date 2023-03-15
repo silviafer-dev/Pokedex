@@ -12,6 +12,7 @@ import { SearchInput } from '../components/SearchInput';
 import { usePokemonSearch } from '../hooks/usePokemonSearch';
 import { styles as globalStyles } from '../theme/appTheme';
 import { PokemonCard } from '../components/PokemonCard';
+import { Loading } from '../components/Loading';
 
 export const SearchScreen = () => {
   const { top } = useSafeAreaInsets();
@@ -19,12 +20,7 @@ export const SearchScreen = () => {
   const { isFetching, simplePokemonList } = usePokemonSearch();
 
   if (isFetching) {
-    return (
-      <View style={styles.activityContainer}>
-        <ActivityIndicator size={50} color="grey" />
-        <Text>Charging ...</Text>
-      </View>
-    );
+    return <Loading />;
   }
 
   return (
@@ -55,11 +51,3 @@ export const SearchScreen = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  activityContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
