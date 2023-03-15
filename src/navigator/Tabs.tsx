@@ -15,6 +15,7 @@ export const Tabs = () => {
         backgroundColor: 'white',
       }}
       screenOptions={() => ({
+        headerShown: false,
         tabBarActiveTintColor: '#5856D6',
         tabBarStyle: {
           position: 'absolute',
