@@ -8,7 +8,7 @@ export const SearchInput = () => {
     <View style={styles.container}>
       <View style={styles.textBackground}>
         <TextInput
-          placeholder="Buscar Pokémon"
+          placeholder="Search Pokemon"
           style={{ ...styles.textInput, top: Platform.OS === 'ios' ? 0 : 2 }}
           autoCapitalize="none"
           autoCorrect={false}

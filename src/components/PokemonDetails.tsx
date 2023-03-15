@@ -26,7 +26,7 @@ export const PokemonDetails = ({ pokemon }: Props) => {
           ))}
         </View>
 
-        <Text style={styles.title}>Peso</Text>
+        <Text style={styles.title}>Weight</Text>
         <Text style={styles.regularText}>{pokemon.weight} Kg</Text>
       </View>
       <View style={styles.container}>
@@ -54,7 +54,7 @@ export const PokemonDetails = ({ pokemon }: Props) => {
       </ScrollView>
       {/* Habilidades */}
       <View style={styles.container}>
-        <Text style={styles.title}>Habilidades base</Text>
+        <Text style={styles.title}>Basic Abilities</Text>
         <View style={{ flexDirection: 'row' }}>
           {pokemon.abilities.map(({ ability }) => (
             <Text style={styles.regularText} key={ability.name}>
@@ -65,7 +65,7 @@ export const PokemonDetails = ({ pokemon }: Props) => {
       </View>
       {/* Movimientos */}
       <View style={styles.container}>
-        <Text style={styles.title}>Movimientos</Text>
+        <Text style={styles.title}>Moves</Text>
         <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
           {pokemon.moves.map(({ move }) => (
             <Text style={styles.regularText} key={move.name}>
