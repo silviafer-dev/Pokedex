@@ -3,7 +3,7 @@ import React from 'react';
 import { Text, View, Image, StyleSheet, ActivityIndicator } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { RootStackParams } from '../navigator/Navigation';
+import { RootStackParams } from '../navigator/Tab1';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FadeInImage } from '../components/FadeInImage';
 import { usePokemon } from '../hooks/usePokemon';

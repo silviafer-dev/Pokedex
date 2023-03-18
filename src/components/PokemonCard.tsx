@@ -1,7 +1,14 @@
-import { CommonActions, useNavigation } from '@react-navigation/native';
 import React, { useEffect, useRef, useState } from 'react';
-import { Text, View, StyleSheet, Dimensions, Image } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { CommonActions } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/core';
+import {
+  Text,
+  View,
+  StyleSheet,
+  Dimensions,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import ImageColors from 'react-native-image-colors';
 import { SimplePokemon } from '../interfaces/pokemonInterfaces';
 import { FadeInImage } from './FadeInImage';
