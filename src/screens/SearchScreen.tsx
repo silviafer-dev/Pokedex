@@ -1,18 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Platform, Text, FlatList, Dimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { SearchInput } from '../components/SearchInput';
+import { SimplePokemon } from '../interfaces/pokemonInterfaces';
+import { styles } from '../theme/appTheme';
+
 import { usePokemonSearch } from '../hooks/usePokemonSearch';
+import { SearchInput } from '../components/SearchInput';
 import { PokemonCard } from '../components/PokemonCard';
 import { Loading } from '../components/Loading';
-import { styles } from '../theme/appTheme';
 
 const screenWidth = Dimensions.get('window').width;
 
 export const SearchScreen = () => {
   const { top } = useSafeAreaInsets();
-
   const { isFetching, simplePokemonList } = usePokemonSearch();
+  const [term, setTerm] = useState('');
+  const [pokemonFiltered, setPokemonFiltered] = useState<SimplePokemon[]>([]);
+
+  useEffect(() => {
+    if (term.length === 0) {
+      return setPokemonFiltered([]);
+    }
+
+    setPokemonFiltered(
+      simplePokemonList.filter(poke =>
+        poke.name.toLowerCase().includes(term.toLowerCase()),
+      ),
+    );
+  }, [simplePokemonList, term]);
 
   if (isFetching) {
     return <Loading />;
@@ -25,6 +40,7 @@ export const SearchScreen = () => {
         marginHorizontal: 20,
       }}>
       <SearchInput
+        onDebounce={value => setTerm(value)}
         style={{
           position: 'absolute',
           zIndex: 999,
@@ -33,7 +49,7 @@ export const SearchScreen = () => {
         }}
       />
       <FlatList
-        data={simplePokemonList}
+        data={pokemonFiltered}
         keyExtractor={poke => poke.id}
         numColumns={2}
         showsVerticalScrollIndicator={false}
@@ -46,7 +62,7 @@ export const SearchScreen = () => {
               paddingBottom: 10,
               marginTop: Platform.OS === 'ios' ? top + 60 : top + 80,
             }}>
-            Pokedex
+            {term}
           </Text>
         }
         renderItem={({ item }) => <PokemonCard pokemon={item} />}

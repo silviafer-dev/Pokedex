@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from 'react';
 import {
   View,
@@ -13,17 +14,19 @@ import { useDebounceValue } from '../hooks/useDebounceValue';
 import { useEffect } from 'react';
 
 interface Props {
+  onDebounce: (value: string) => void;
   style?: StyleProp<ViewStyle>;
 }
 
-export const SearchInput = ({ style }: Props) => {
+export const SearchInput = ({ style, onDebounce }: Props) => {
   const [textValue, setTextValue] = useState('');
 
   const debouncedValue = useDebounceValue(textValue);
 
   useEffect(() => {
-    console.log({ debouncedValue });
+    onDebounce(debouncedValue);
   }, [debouncedValue]);
+
   return (
     <View style={{ ...styles.container, ...(style as any) }}>
       <View style={styles.textBackground}>
