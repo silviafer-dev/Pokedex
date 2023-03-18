@@ -36,6 +36,7 @@ export const SearchScreen = () => {
         data={simplePokemonList}
         keyExtractor={poke => poke.id}
         numColumns={2}
+        showsVerticalScrollIndicator={false}
         // Header
         ListHeaderComponent={
           <Text
